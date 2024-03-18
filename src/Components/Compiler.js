@@ -4,7 +4,7 @@ import './Compiler.css';
 const Compiler = () => {
   const [input, setInput] = useState(localStorage.getItem('input') || '');
   const [output, setOutput] = useState('');
-  const [languageId, setLanguageId] = useState(localStorage.getItem('language_Id') || 2);
+  const [languageId, setLanguageId] = useState(2);
   const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
@@ -42,8 +42,14 @@ const Compiler = () => {
             "content-type": "application/json",
             accept: "application/json",
           },
+          body: JSON.stringify({
+            source_code: input,
+            stdin: userInput,
+            language_id: languageId,
+          }),
         //
-        }
+        },
+        
       );
       console.log(input,"input");
       console.log(userInput,"userinput");
